@@ -1,8 +1,7 @@
 from sqlalchemy.orm import Session
 from typing import Dict
 from ..repositories.product_repository import ProductRepository
-from ..schemas.cart import CartResponse, CartItem, \
-                            CartItemCreate, CartItemUpdate
+from ..schemas.cart import CartResponse, CartItemResponse, CartItemCreate, CartItemUpdate
 from fastapi import HTTPException, status
 
 
@@ -63,7 +62,7 @@ class CartService:
                 product = products_dict[product_id]
                 subtotal = product.price * quantity
 
-                cart_item = CartItem(product_id=product.id, name=product.name,
+                cart_item = CartItemResponse(product_id=product.id, name=product.name,
                     price=product.price, quantity=quantity, subtotal=subtotal,
                     image_url=product.image_url)
 
